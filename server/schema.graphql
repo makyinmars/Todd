@@ -5,3 +5,9 @@
 type Query {
   ok: Boolean!
 }
+
+type ToddIdea {
+  id: Int!
+  idea: String!
+  imageUrl: String!
+}

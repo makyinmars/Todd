@@ -10,24 +10,24 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model ToddIdea {
+  id Int @id @default(autoincrement())
+
+  idea String
+  imageUrl String
+  votesFor Vote[] @relation("votesFor")
+  votesAgainst Vote[] @relation("votesAgainst")
+}
+
 model Vote {
   id       String @id @default(cuid())
   createdAt DateTime @default(now())
 
   votedFor ToddIdea @relation(name: "votesFor", fields: [votedForId], references: [id])
-  votedForId String
+  votedForId Int
   votedAgainst ToddIdea @relation(name: "votesAgainst", fields: [votedAgainstId], references: [id])
-  votedAgainstId String
+  votedAgainstId Int
 
   @@index([votedForId])
   @@index([votedAgainstId])
-}
-
-model ToddIdea {
-  id String @id @default(cuid())
-
-  idea String
-  imageUrl String
-  voteFor Vote[] @relation("votesFor")
-  voteAgainst Vote[] @relation("votesAgainst")
 }
