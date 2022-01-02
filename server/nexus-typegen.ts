@@ -4,7 +4,7 @@
  */
 
 
-
+import type { Context } from "./api/context"
 
 
 
@@ -28,12 +28,13 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenObjects {
-  Query: {};
-  ToddIdea: { // root type
+  Idea: { // root type
     id: number; // Int!
     idea: string; // String!
     imageUrl: string; // String!
   }
+  Mutation: {};
+  Query: {};
 }
 
 export interface NexusGenInterfaces {
@@ -47,28 +48,40 @@ export type NexusGenRootTypes = NexusGenObjects
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
-  Query: { // field return type
-    ok: boolean; // Boolean!
-  }
-  ToddIdea: { // field return type
+  Idea: { // field return type
     id: number; // Int!
     idea: string; // String!
     imageUrl: string; // String!
   }
+  Mutation: { // field return type
+    createIdea: NexusGenRootTypes['Idea']; // Idea!
+  }
+  Query: { // field return type
+    ideas: NexusGenRootTypes['Idea'][]; // [Idea!]!
+  }
 }
 
 export interface NexusGenFieldTypeNames {
-  Query: { // field return type name
-    ok: 'Boolean'
-  }
-  ToddIdea: { // field return type name
+  Idea: { // field return type name
     id: 'Int'
     idea: 'String'
     imageUrl: 'String'
   }
+  Mutation: { // field return type name
+    createIdea: 'Idea'
+  }
+  Query: { // field return type name
+    ideas: 'Idea'
+  }
 }
 
 export interface NexusGenArgTypes {
+  Mutation: {
+    createIdea: { // args
+      idea: string; // String!
+      imageUrl: string; // String!
+    }
+  }
 }
 
 export interface NexusGenAbstractTypeMembers {
@@ -102,7 +115,7 @@ export type NexusGenFeaturesConfig = {
 }
 
 export interface NexusGenTypes {
-  context: any;
+  context: Context;
   inputTypes: NexusGenInputs;
   rootTypes: NexusGenRootTypes;
   inputTypeShapes: NexusGenInputs & NexusGenEnums & NexusGenScalars;

@@ -2,12 +2,16 @@
 ### Do not make changes to this file directly
 
 
-type Query {
-  ok: Boolean!
-}
-
-type ToddIdea {
+type Idea {
   id: Int!
   idea: String!
   imageUrl: String!
+}
+
+type Mutation {
+  createIdea(idea: String!, imageUrl: String!): Idea!
+}
+
+type Query {
+  ideas: [Idea!]!
 }
