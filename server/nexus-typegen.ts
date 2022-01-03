@@ -32,15 +32,14 @@ export interface NexusGenObjects {
     id: number; // Int!
     idea: string; // String!
     imageUrl: string; // String!
+    votes?: NexusGenRootTypes['Vote'] | null; // Vote
   }
   Mutation: {};
   Query: {};
   Vote: { // root type
     id: string; // String!
-    votedAgainst?: NexusGenRootTypes['Idea'] | null; // Idea
-    votedAgainstId: number; // Int!
-    votedFor?: NexusGenRootTypes['Idea'] | null; // Idea
-    votedForId: number; // Int!
+    idea?: NexusGenRootTypes['Idea'] | null; // Idea
+    ideaId: number; // Int!
   }
 }
 
@@ -59,6 +58,7 @@ export interface NexusGenFieldTypes {
     id: number; // Int!
     idea: string; // String!
     imageUrl: string; // String!
+    votes: NexusGenRootTypes['Vote'] | null; // Vote
   }
   Mutation: { // field return type
     createIdea: NexusGenRootTypes['Idea']; // Idea!
@@ -71,10 +71,8 @@ export interface NexusGenFieldTypes {
   }
   Vote: { // field return type
     id: string; // String!
-    votedAgainst: NexusGenRootTypes['Idea'] | null; // Idea
-    votedAgainstId: number; // Int!
-    votedFor: NexusGenRootTypes['Idea'] | null; // Idea
-    votedForId: number; // Int!
+    idea: NexusGenRootTypes['Idea'] | null; // Idea
+    ideaId: number; // Int!
   }
 }
 
@@ -83,6 +81,7 @@ export interface NexusGenFieldTypeNames {
     id: 'Int'
     idea: 'String'
     imageUrl: 'String'
+    votes: 'Vote'
   }
   Mutation: { // field return type name
     createIdea: 'Idea'
@@ -95,10 +94,8 @@ export interface NexusGenFieldTypeNames {
   }
   Vote: { // field return type name
     id: 'String'
-    votedAgainst: 'Idea'
-    votedAgainstId: 'Int'
-    votedFor: 'Idea'
-    votedForId: 'Int'
+    idea: 'Idea'
+    ideaId: 'Int'
   }
 }
 

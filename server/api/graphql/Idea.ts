@@ -6,6 +6,9 @@ export const Idea = objectType({
     t.nonNull.int("id");
     t.nonNull.string("idea");
     t.nonNull.string("imageUrl");
+    t.field("votes", {
+      type: "Vote",
+    });
   },
 });
 
