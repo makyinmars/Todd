@@ -1,4 +1,4 @@
-import { objectType, extendType, stringArg, nonNull } from "nexus";
+import { objectType, extendType, stringArg, intArg, nonNull } from "nexus";
 
 export const Idea = objectType({
   name: "Idea",
@@ -16,6 +16,20 @@ export const IdeaQuery = extendType({
       type: nonNull("Idea"),
       resolve(_root, _args, ctx) {
         return ctx.db.idea.findMany({});
+      },
+    });
+
+    t.field("idea", {
+      type: "Idea",
+      args: {
+        id: nonNull(intArg()),
+      },
+      resolve(_root, args, ctx) {
+        return ctx.db.idea.findUnique({
+          where: {
+            id: args.id,
+          },
+        });
       },
     });
   },

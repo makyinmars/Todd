@@ -13,5 +13,16 @@ type Mutation {
 }
 
 type Query {
+  idea(id: Int!): Idea
   ideas: [Idea!]!
+  vote(id: String!): Vote
+  votes: [Vote!]!
+}
+
+type Vote {
+  id: String!
+  votedAgainst: Idea
+  votedAgainstId: Int!
+  votedFor: Idea
+  votedForId: Int!
 }

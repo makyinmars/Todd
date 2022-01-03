@@ -35,6 +35,13 @@ export interface NexusGenObjects {
   }
   Mutation: {};
   Query: {};
+  Vote: { // root type
+    id: string; // String!
+    votedAgainst?: NexusGenRootTypes['Idea'] | null; // Idea
+    votedAgainstId: number; // Int!
+    votedFor?: NexusGenRootTypes['Idea'] | null; // Idea
+    votedForId: number; // Int!
+  }
 }
 
 export interface NexusGenInterfaces {
@@ -57,7 +64,17 @@ export interface NexusGenFieldTypes {
     createIdea: NexusGenRootTypes['Idea']; // Idea!
   }
   Query: { // field return type
+    idea: NexusGenRootTypes['Idea'] | null; // Idea
     ideas: NexusGenRootTypes['Idea'][]; // [Idea!]!
+    vote: NexusGenRootTypes['Vote'] | null; // Vote
+    votes: NexusGenRootTypes['Vote'][]; // [Vote!]!
+  }
+  Vote: { // field return type
+    id: string; // String!
+    votedAgainst: NexusGenRootTypes['Idea'] | null; // Idea
+    votedAgainstId: number; // Int!
+    votedFor: NexusGenRootTypes['Idea'] | null; // Idea
+    votedForId: number; // Int!
   }
 }
 
@@ -71,7 +88,17 @@ export interface NexusGenFieldTypeNames {
     createIdea: 'Idea'
   }
   Query: { // field return type name
+    idea: 'Idea'
     ideas: 'Idea'
+    vote: 'Vote'
+    votes: 'Vote'
+  }
+  Vote: { // field return type name
+    id: 'String'
+    votedAgainst: 'Idea'
+    votedAgainstId: 'Int'
+    votedFor: 'Idea'
+    votedForId: 'Int'
   }
 }
 
@@ -80,6 +107,14 @@ export interface NexusGenArgTypes {
     createIdea: { // args
       idea: string; // String!
       imageUrl: string; // String!
+    }
+  }
+  Query: {
+    idea: { // args
+      id: number; // Int!
+    }
+    vote: { // args
+      id: string; // String!
     }
   }
 }

@@ -11,24 +11,15 @@ datasource db {
 }
 
 model Idea {
-  id Int @id @default(autoincrement())
-
-  idea         String
-  imageUrl     String
-  votesFor     Vote[] @relation("votesFor")
-  votesAgainst Vote[] @relation("votesAgainst")
+  id       Int    @id @default(autoincrement())
+  idea     String
+  imageUrl String
+  votes    Vote[]
 }
 
 model Vote {
   id        String   @id @default(cuid())
   createdAt DateTime @default(now())
-
-  votedFor       Idea @relation(name: "votesFor", fields: [votedForId], references: [id])
-  votedForId     Int
-  votedAgainst   Idea @relation(name: "votesAgainst", fields: [votedAgainstId], references: [id])
-  votedAgainstId Int
-
-  @@index([votedForId])
-  @@index([votedAgainstId])
+  idea      Idea     @relation(fields: [ideaId], references: [id])
+  ideaId    Int
 }
-
