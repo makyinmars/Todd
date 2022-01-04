@@ -3,18 +3,17 @@ import {
   objectType,
   nonNull,
   stringArg,
-  list,
-  extendInputType,
+  inputObjectType,
 } from "nexus";
 
 export const Vote = objectType({
   name: "Vote",
   definition(t) {
-    t.nonNull.string("id");
+    t.nonNull.id("id");
     t.field("idea", {
       type: "Idea",
     });
-    t.nonNull.int("ideaId");
+    t.nonNull.id("ideaId");
   },
 });
 
@@ -44,19 +43,40 @@ export const VoteQuery = extendType({
   },
 });
 
-export const VoteMutation = extendType({
-  type: "Mutation",
-  definition(t) {
-    t.nonNull.field("createVote", {
-      type: "Vote",
-      args: {
-        ideaId: (),
-      },
-      resolve(_root, args, ctx) {
-        return ctx.db.vote.create({
-          data: args.idea,
-        });
-      },
-    });
-  },
-});
+// export const VoteInputType = inputObjectType({
+//   name: "VoteInputType",
+//   definition(t) {
+//     t.nonNull.id("id");
+//   },
+// });
+
+// export const CreateIdeaInput = inputObjectType({
+//   name: "CreateIdeaInput",
+//   definition(t) {
+//     t.nonNull.id("id");
+//     t.nonNull.string("idea");
+//     t.nonNull.string("imageUrl");
+//   },
+// });
+
+// export const VoteMutation = extendType({
+//   type: "Mutation",
+//   definition(t) {
+//     t.nonNull.field("createVote", {
+//       type: "Vote",
+//       args: {
+//         input: nonNull(CreateIdeaInput),
+
+//         where: nonNull(VoteInputType),
+//       },
+//       resolve(root, args, ctx) {
+//         return ctx.db.vote.create({
+//           data: {
+//             ...args.input,
+//             ideaId: args.where.id,
+//           },
+//         });
+//       },
+//     });
+//   },
+// });

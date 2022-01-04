@@ -29,17 +29,16 @@ export interface NexusGenScalars {
 
 export interface NexusGenObjects {
   Idea: { // root type
-    id: number; // Int!
+    id: string; // ID!
     idea: string; // String!
     imageUrl: string; // String!
     votes?: NexusGenRootTypes['Vote'] | null; // Vote
   }
-  Mutation: {};
   Query: {};
   Vote: { // root type
-    id: string; // String!
+    id: string; // ID!
     idea?: NexusGenRootTypes['Idea'] | null; // Idea
-    ideaId: number; // Int!
+    ideaId: string; // ID!
   }
 }
 
@@ -55,13 +54,10 @@ export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
   Idea: { // field return type
-    id: number; // Int!
+    id: string; // ID!
     idea: string; // String!
     imageUrl: string; // String!
     votes: NexusGenRootTypes['Vote'] | null; // Vote
-  }
-  Mutation: { // field return type
-    createIdea: NexusGenRootTypes['Idea']; // Idea!
   }
   Query: { // field return type
     idea: NexusGenRootTypes['Idea'] | null; // Idea
@@ -70,21 +66,18 @@ export interface NexusGenFieldTypes {
     votes: NexusGenRootTypes['Vote'][]; // [Vote!]!
   }
   Vote: { // field return type
-    id: string; // String!
+    id: string; // ID!
     idea: NexusGenRootTypes['Idea'] | null; // Idea
-    ideaId: number; // Int!
+    ideaId: string; // ID!
   }
 }
 
 export interface NexusGenFieldTypeNames {
   Idea: { // field return type name
-    id: 'Int'
+    id: 'ID'
     idea: 'String'
     imageUrl: 'String'
     votes: 'Vote'
-  }
-  Mutation: { // field return type name
-    createIdea: 'Idea'
   }
   Query: { // field return type name
     idea: 'Idea'
@@ -93,22 +86,16 @@ export interface NexusGenFieldTypeNames {
     votes: 'Vote'
   }
   Vote: { // field return type name
-    id: 'String'
+    id: 'ID'
     idea: 'Idea'
-    ideaId: 'Int'
+    ideaId: 'ID'
   }
 }
 
 export interface NexusGenArgTypes {
-  Mutation: {
-    createIdea: { // args
-      idea: string; // String!
-      imageUrl: string; // String!
-    }
-  }
   Query: {
     idea: { // args
-      id: number; // Int!
+      id: string; // ID!
     }
     vote: { // args
       id: string; // String!

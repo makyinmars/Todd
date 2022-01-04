@@ -11,7 +11,7 @@ datasource db {
 }
 
 model Idea {
-  id       Int    @id @default(autoincrement())
+  id       String    @id @default(cuid())
   idea     String
   imageUrl String
   votes    Vote[]
@@ -21,5 +21,5 @@ model Vote {
   id        String   @id @default(cuid())
   createdAt DateTime @default(now())
   idea      Idea     @relation(fields: [ideaId], references: [id])
-  ideaId    Int
+  ideaId    String
 }
