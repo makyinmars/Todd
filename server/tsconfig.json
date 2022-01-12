@@ -1,12 +1,31 @@
 {
   "compilerOptions": {
-    "target": "ES2018",
-    "module": "commonjs",
-    "lib": ["esnext"],
-    "strict": true,
-    "rootDir": ".",
+    /* Projects */
     "outDir": "dist",
-    "sourceMap": true,
-    "esModuleInterop": true
-  }
+    "rootDir": "src",
+
+    /* Language and Environment */
+    "target": "ESNext",
+    "lib": ["ESNext", "DOM"],
+
+    /* Modules */
+    "module": "CommonJS",
+
+    /* Emit */
+    "removeComments": true,
+
+    /* Interop Constraints */
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+
+    /* Type Checking */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+
+    /* Completeness */
+    "skipLibCheck": true
+  },
+
+  "exclude": ["node_modules"]
 }

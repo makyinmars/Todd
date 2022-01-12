@@ -1,18 +1,23 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "",
+  "description": "Todd Graphql Server",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev --transpile-only --no-notify api/index.ts",
-    "build": "tsc"
+    "postinstall": "npm -s run generate",
+    "dev": "NODE_ENV=development ts-node-dev -r dotenv/config --no-notify --respawn --transpile-only src",
+    "generate": "npm -s run generate:nexus && npm -s run generate:prisma",
+    "generate:nexus": "ts-node -transpile-only src/schema",
+    "generate:prisma": "prisma generate"
   },
   "keywords": [],
-  "author": "",
+  "author": "makyfj",
   "license": "ISC",
   "dependencies": {
     "@prisma/client": "^3.7.0",
-    "apollo-server": "^3.6.1",
+    "apollo-server-core": "^3.6.1",
+    "apollo-server-express": "^3.6.1",
+    "dotenv": "^11.0.0",
     "graphql": "^15.8.0",
     "nexus": "^1.1.0"
   },
