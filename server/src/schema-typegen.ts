@@ -14,6 +14,15 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  IdeaWhereUniqueInput: { // input type
+    id: string; // ID!
+  }
+  VoteIdeaWhereUniqueInput: { // input type
+    ideaId: string; // String!
+  }
+  VoteWhereUniqueInput: { // input type
+    id: string; // ID!
+  }
 }
 
 export interface NexusGenEnums {
@@ -32,6 +41,7 @@ export interface NexusGenObjects {
     content: string; // String!
     id: string; // ID!
     imageUrl: string; // String!
+    title: string; // String!
   }
   Mutation: {};
   Query: {};
@@ -56,9 +66,11 @@ export interface NexusGenFieldTypes {
     content: string; // String!
     id: string; // ID!
     imageUrl: string; // String!
+    title: string; // String!
+    votes: NexusGenRootTypes['Vote'][]; // [Vote!]!
   }
   Mutation: { // field return type
-    voteIdea: NexusGenRootTypes['Idea'] | null; // Idea
+    voteIdea: NexusGenRootTypes['Vote'] | null; // Vote
   }
   Query: { // field return type
     idea: NexusGenRootTypes['Idea'] | null; // Idea
@@ -68,6 +80,7 @@ export interface NexusGenFieldTypes {
   }
   Vote: { // field return type
     id: string; // ID!
+    idea: NexusGenRootTypes['Idea']; // Idea!
     ideaId: string; // String!
   }
 }
@@ -77,9 +90,11 @@ export interface NexusGenFieldTypeNames {
     content: 'String'
     id: 'ID'
     imageUrl: 'String'
+    title: 'String'
+    votes: 'Vote'
   }
   Mutation: { // field return type name
-    voteIdea: 'Idea'
+    voteIdea: 'Vote'
   }
   Query: { // field return type name
     idea: 'Idea'
@@ -89,11 +104,25 @@ export interface NexusGenFieldTypeNames {
   }
   Vote: { // field return type name
     id: 'ID'
+    idea: 'Idea'
     ideaId: 'String'
   }
 }
 
 export interface NexusGenArgTypes {
+  Mutation: {
+    voteIdea: { // args
+      where: NexusGenInputs['VoteIdeaWhereUniqueInput']; // VoteIdeaWhereUniqueInput!
+    }
+  }
+  Query: {
+    idea: { // args
+      where: NexusGenInputs['IdeaWhereUniqueInput']; // IdeaWhereUniqueInput!
+    }
+    vote: { // args
+      where: NexusGenInputs['VoteWhereUniqueInput']; // VoteWhereUniqueInput!
+    }
+  }
 }
 
 export interface NexusGenAbstractTypeMembers {
@@ -104,7 +133,7 @@ export interface NexusGenTypeInterfaces {
 
 export type NexusGenObjectNames = keyof NexusGenObjects;
 
-export type NexusGenInputNames = never;
+export type NexusGenInputNames = keyof NexusGenInputs;
 
 export type NexusGenEnumNames = never;
 

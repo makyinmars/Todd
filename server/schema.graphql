@@ -6,20 +6,35 @@ type Idea {
   content: String!
   id: ID!
   imageUrl: String!
+  title: String!
+  votes: [Vote!]!
+}
+
+input IdeaWhereUniqueInput {
+  id: ID!
 }
 
 type Mutation {
-  voteIdea: Idea
+  voteIdea(where: VoteIdeaWhereUniqueInput!): Vote
 }
 
 type Query {
-  idea: Idea
+  idea(where: IdeaWhereUniqueInput!): Idea
   ideas: [Idea!]
-  vote: Vote
+  vote(where: VoteWhereUniqueInput!): Vote
   votes: [Vote!]
 }
 
 type Vote {
   id: ID!
+  idea: Idea!
   ideaId: String!
+}
+
+input VoteIdeaWhereUniqueInput {
+  ideaId: String!
+}
+
+input VoteWhereUniqueInput {
+  id: ID!
 }

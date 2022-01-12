@@ -1,9 +1,17 @@
-import { mutationField, nullable } from "nexus";
-import { Idea } from "../models";
+import { mutationField, nonNull, nullable } from "nexus";
+import { VoteIdeaWhereUniqueInput } from "../inputs";
+import { Vote } from "../models";
 
 export const voteIdea = mutationField("voteIdea", {
-  type: nullable(Idea),
-  resolve: async (_root, _args, _ctx) => {
-    return null;
+  type: nullable(Vote),
+  args: {
+    where: nonNull(VoteIdeaWhereUniqueInput),
+  },
+  resolve: async (_root, args, ctx) => {
+    return ctx.prisma.vote.create({
+      data: {
+        ideaId: args.where.ideaId,
+      },
+    });
   },
 });
