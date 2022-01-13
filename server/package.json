@@ -5,11 +5,14 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run build && node dist/index.js",
-    "build": "rimraf ./dist && tsc",
+    "build": "rimraf ./dist && tsc && cp -r src/prisma dist/",
     "dev": "NODE_ENV=development ts-node-dev -r dotenv/config --no-notify --respawn --transpile-only src",
     "generate": "npm -s run generate:nexus && npm -s run generate:prisma",
     "generate:nexus": "ts-node --transpile-only src/schema",
-    "generate:prisma": "prisma migrate dev"
+    "generate:prisma": "npx prisma migrate dev"
+  },
+  "prisma": {
+    "schema": "src/prisma/schema.prisma"
   },
   "keywords": [],
   "author": "makyfj",
