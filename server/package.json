@@ -4,13 +4,12 @@
   "description": "Todd Graphql Server",
   "main": "index.js",
   "scripts": {
-    "start": "node dist/index.js",
-    "postinstall": "npm -s run generate",
+    "start": "npm run build && node dist/index.js",
+    "build": "rimraf ./dist && tsc",
     "dev": "NODE_ENV=development ts-node-dev -r dotenv/config --no-notify --respawn --transpile-only src",
     "generate": "npm -s run generate:nexus && npm -s run generate:prisma",
     "generate:nexus": "ts-node --transpile-only src/schema",
-    "generate:prisma": "prisma generate",
-    "build": "npx prisma migrate dev && tsc --outDir dist && cp -r prisma dist/"
+    "generate:prisma": "prisma migrate dev"
   },
   "keywords": [],
   "author": "makyfj",
@@ -20,9 +19,11 @@
     "apollo-server-core": "^3.6.1",
     "apollo-server-express": "^3.6.1",
     "dotenv": "^11.0.0",
+    "express": "^4.17.2",
     "graphql": "^15.8.0",
     "graphql-middleware": "^6.1.13",
-    "nexus": "^1.1.0"
+    "nexus": "^1.1.0",
+    "rimraf": "^3.0.2"
   },
   "devDependencies": {
     "prisma": "^3.8.0",

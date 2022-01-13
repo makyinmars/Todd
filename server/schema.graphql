@@ -2,6 +2,12 @@
 ### Do not make changes to this file directly
 
 
+input CreateIdeaInput {
+  content: String!
+  imageUrl: String!
+  title: String!
+}
+
 type Idea {
   content: String!
   id: ID!
@@ -15,6 +21,7 @@ input IdeaWhereUniqueInput {
 }
 
 type Mutation {
+  createIdea(input: CreateIdeaInput!): Idea
   voteIdea(where: VoteIdeaWhereUniqueInput!): Vote
 }
 

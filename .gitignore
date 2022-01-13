@@ -1,4 +1,7 @@
 server/node_modules
 server/.env
+server/dist
+server/Query.json
+
 client/node_modules
 .idea

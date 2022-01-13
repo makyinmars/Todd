@@ -14,20 +14,21 @@ async function startApolloServer() {
     schema,
     context: createContext,
     plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
+    introspection: true,
   });
 
   await server.start();
 
-  server.applyMiddleware({ app });
+  server.applyMiddleware({ app, path: "/api" });
+
+  const PORT = process.env.PORT || 4000;
 
   await new Promise<void>((resolve) => {
-    httpServer.listen({ port: 4000 });
+    httpServer.listen({ port: PORT });
     resolve();
   });
 
-  console.log(
-    `Server is running at http://localhost:4000${server.graphqlPath}`
-  );
+  console.log(`Server is running ${PORT}${server.graphqlPath}`);
 }
 
 startApolloServer();
