@@ -4,8 +4,8 @@
   "description": "Todd Graphql Server",
   "main": "index.js",
   "scripts": {
-    "start": "npm run build && node dist/index.js",
-    "build": "rimraf ./dist && tsc && cp -r src/prisma dist/",
+    "start": "node dist/index.js",
+    "build": "tsc --outDir dist && cp -r src/prisma dist/",
     "dev": "NODE_ENV=development ts-node-dev -r dotenv/config --no-notify --respawn --transpile-only src",
     "generate": "npm -s run generate:nexus && npm -s run generate:prisma",
     "generate:nexus": "ts-node --transpile-only src/schema",
@@ -25,8 +25,7 @@
     "express": "^4.17.2",
     "graphql": "^15.8.0",
     "graphql-middleware": "^6.1.13",
-    "nexus": "^1.1.0",
-    "rimraf": "^3.0.2"
+    "nexus": "^1.1.0"
   },
   "devDependencies": {
     "prisma": "^3.8.0",
