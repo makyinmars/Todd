@@ -4,4 +4,5 @@ server/dist
 server/Query.json
 
 client/node_modules
+client/.env
 .idea

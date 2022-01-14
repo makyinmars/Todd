@@ -1,6 +1,7 @@
 import React from "react";
 import { gql, useMutation } from "@apollo/client";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { useRouter } from "next/router";
 
 import Spinner from "./spinner";
 
@@ -22,17 +23,20 @@ const VOTE_IDEA = gql`
 `;
 
 const VoteIdeaForm = ({ id }: VoteIdeaProps) => {
-  const [voteIdea, { data, loading, error }] = useMutation(VOTE_IDEA);
+  const router = useRouter();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<VoteIdeaInputs>();
+  const [voteIdea, { loading, error }] = useMutation(VOTE_IDEA);
+
+  const { register, handleSubmit } = useForm<VoteIdeaInputs>();
 
   const onSubmit: SubmitHandler<VoteIdeaInputs> = (data) => {
     data.id = id;
-    voteIdea({ variables: { ideaId: data.id } });
+    voteIdea({
+      variables: { ideaId: data.id },
+      onCompleted: () => {
+        router.push("/results");
+      },
+    });
   };
 
   if (loading) return <Spinner />;

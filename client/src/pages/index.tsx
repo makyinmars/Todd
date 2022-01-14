@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import Idea from "../components/idea";
 
-const Home: NextPage = () => {
+const HomePage: NextPage = () => {
   return (
     <div>
       <Idea />
@@ -9,4 +9,4 @@ const Home: NextPage = () => {
   );
 };
 
-export default Home;
+export default HomePage;

@@ -6,7 +6,7 @@ import Image from "next/image";
 import Spinner from "./spinner";
 import VoteIdeaForm from "./voteIdeaForm";
 
-interface Idea {
+export interface Idea {
   id: string;
   title: string;
   content: string;
@@ -44,6 +44,15 @@ const Idea = () => {
     <div>
       <Head>
         <title>Todd Chavez{`'`}s Crazy Ideas</title>
+
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta
+          name="content"
+          content="From Netflix BoJack Horseman He is known for his deep understanding of serious and 
+          controversial subjects, but writers spend a considerable amount of their screen time on comedy. 
+          Todd Chávez and his crazy ideas are one of the show’s greatest sources of comic relief. From 
+          the ridiculous cube-shaped marbles to the hit Cabracadabra, Todd’s imagination knew no bounds."
+        />
       </Head>
       {data && (
         <div className="m-2 grid grid-cols-1 gap-6 my-4 sm:w-2/3 md:w-2/3 sm:mx-auto">
