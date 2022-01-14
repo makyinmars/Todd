@@ -1,5 +1,5 @@
 import React from "react";
-import { gql, useQuery, useMutation } from "@apollo/client";
+import { gql, useMutation } from "@apollo/client";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 import Spinner from "./spinner";
@@ -14,7 +14,7 @@ interface VoteIdeaInputs {
 
 const VOTE_IDEA = gql`
   mutation VoteIdea($ideaId: String!) {
-    voteIdea(ideaId: $ideaId) {
+    voteIdea(where: { ideaId: $ideaId }) {
       ideaId
       id
     }
@@ -32,7 +32,7 @@ const VoteIdeaForm = ({ id }: VoteIdeaProps) => {
 
   const onSubmit: SubmitHandler<VoteIdeaInputs> = (data) => {
     data.id = id;
-    console.log(data);
+    voteIdea({ variables: { ideaId: data.id } });
   };
 
   if (loading) return <Spinner />;

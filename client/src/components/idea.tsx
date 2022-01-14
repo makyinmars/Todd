@@ -55,7 +55,7 @@ const Idea = () => {
               <li className="pt-2 text-xl font-bold text-center">
                 {idea.title}
               </li>
-              <li className="p-2">{idea.content}</li>
+
               <li className="flex justify-center">
                 <img
                   className="h-48 py-2 w-80"
@@ -63,6 +63,7 @@ const Idea = () => {
                   alt={idea.title}
                 />
               </li>
+              <li className="p-2">{idea.content}</li>
               <VoteIdeaForm id={idea.id} />
             </ul>
           ))}
