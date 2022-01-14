@@ -1,10 +1,9 @@
 import React from "react";
 import Head from "next/head";
-import { gql, useQuery, useMutation } from "@apollo/client";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { gql, useQuery } from "@apollo/client";
 
 import Spinner from "./spinner";
-import VoteIdeaForm from "./voteIdeaForm.tsx";
+import VoteIdeaForm from "./voteIdeaForm";
 
 interface Idea {
   id: string;
@@ -15,10 +14,6 @@ interface Idea {
 
 interface Ideas {
   ideas: Idea[];
-}
-
-interface VoteIdeaInputs {
-  id: string;
 }
 
 const IDEAS = gql`
@@ -32,32 +27,8 @@ const IDEAS = gql`
   }
 `;
 
-const VOTE_IDEA = gql`
-  mutation VoteIdea($ideaId: String!) {
-    voteIdea(ideaId: $ideaId) {
-      ideaId
-      id
-    }
-  }
-`;
-
 const Idea = () => {
   const { loading, error, data } = useQuery<Ideas>(IDEAS);
-
-  const [
-    voteIdea,
-    { data: dataMutation, loading: loadingMutation, error: errorMutation },
-  ] = useMutation(VOTE_IDEA);
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<VoteIdeaInputs>();
-
-  const onSubmit: SubmitHandler<VoteIdeaInputs> = (data) => {
-    console.log(data);
-  };
 
   if (loading) return <Spinner />;
 
