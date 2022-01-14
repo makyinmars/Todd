@@ -1,8 +1,13 @@
 import React from "react";
 import Head from "next/head";
-import { gql, useQuery } from "@apollo/client";
+import { gql, useQuery, useMutation } from "@apollo/client";
+import { useForm, SubmitHandler } from "react-hook-form";
+
+import Spinner from "./spinner";
+import VoteIdeaForm from "./voteIdeaForm.tsx";
 
 interface Idea {
+  id: string;
   title: string;
   content: string;
   imageUrl: string;
@@ -12,9 +17,14 @@ interface Ideas {
   ideas: Idea[];
 }
 
+interface VoteIdeaInputs {
+  id: string;
+}
+
 const IDEAS = gql`
   query GetIdeas {
     ideas {
+      id
       title
       content
       imageUrl
@@ -22,11 +32,41 @@ const IDEAS = gql`
   }
 `;
 
+const VOTE_IDEA = gql`
+  mutation VoteIdea($ideaId: String!) {
+    voteIdea(ideaId: $ideaId) {
+      ideaId
+      id
+    }
+  }
+`;
+
 const Idea = () => {
   const { loading, error, data } = useQuery<Ideas>(IDEAS);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error :(</p>;
+  const [
+    voteIdea,
+    { data: dataMutation, loading: loadingMutation, error: errorMutation },
+  ] = useMutation(VOTE_IDEA);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<VoteIdeaInputs>();
+
+  const onSubmit: SubmitHandler<VoteIdeaInputs> = (data) => {
+    console.log(data);
+  };
+
+  if (loading) return <Spinner />;
+
+  if (error)
+    return (
+      <p className="text-center font-bold text-xl text-red-500">
+        Server is currently unavailable :(
+      </p>
+    );
 
   return (
     <div>
@@ -52,11 +92,7 @@ const Idea = () => {
                   alt={idea.title}
                 />
               </li>
-              <div className="flex flex-col items-center justify-center py-2">
-                <button className="w-40 bg-slate-100 border font-bold text-lg text-slate-800 rounded hover:bg-slate-400">
-                  Vote
-                </button>
-              </div>
+              <VoteIdeaForm id={idea.id} />
             </ul>
           ))}
         </div>
