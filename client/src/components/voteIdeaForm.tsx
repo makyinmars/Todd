@@ -25,7 +25,9 @@ const VOTE_IDEA = gql`
 const VoteIdeaForm = ({ id }: VoteIdeaProps) => {
   const router = useRouter();
 
-  const [voteIdea, { loading, error }] = useMutation(VOTE_IDEA);
+  const [voteIdea, { loading, error }] = useMutation(VOTE_IDEA, {
+    refetchQueries: ["Votes"],
+  });
 
   const { register, handleSubmit } = useForm<VoteIdeaInputs>();
 

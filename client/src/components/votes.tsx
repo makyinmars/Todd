@@ -39,8 +39,6 @@ const Votes = () => {
       </p>
     );
 
-  console.log(data);
-
   return (
     <>
       <Head>

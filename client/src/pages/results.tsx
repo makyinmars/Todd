@@ -1,5 +1,6 @@
 import React from "react";
 import { gql } from "@apollo/client";
+import { GetServerSideProps } from "next";
 
 import { client } from "../lib/apollo";
 import ClientOnly from "../components/clientOnly";
@@ -17,14 +18,16 @@ const ResultsPage = () => {
 
 export default ResultsPage;
 
-export async function getServerSideProps() {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const { data } = await client.query({
     query: gql`
       query Votes {
         votes {
           ideaId
           idea {
+            id
             title
+            content
             imageUrl
           }
         }
@@ -37,4 +40,4 @@ export async function getServerSideProps() {
       votes: data.votes,
     },
   };
-}
+};
