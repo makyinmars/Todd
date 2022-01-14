@@ -1,4 +1,5 @@
 import React from "react";
+import Head from "next/head";
 import { gql, useQuery } from "@apollo/client";
 
 interface Idea {
@@ -29,14 +30,18 @@ const Idea = () => {
 
   return (
     <div>
+      <Head>
+        <title>Todd Chavez{`'`}s Crazy Ideas</title>
+      </Head>
+
       {data && (
         <div className="m-2 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
           {data.ideas.map((idea, index) => (
             <ul
               key={index}
-              className="grid grid-columns-1 rounded bg-neutral-300 h-full"
+              className="grid grid-columns-1 rounded bg-slate-700 h-full"
             >
-              <li className="pt-2 text-lg font-bold text-center">
+              <li className="pt-2 text-xl font-bold text-center">
                 {idea.title}
               </li>
               <li className="p-2">{idea.content}</li>
@@ -48,7 +53,7 @@ const Idea = () => {
                 />
               </li>
               <div className="flex flex-col items-center justify-center py-2">
-                <button className="w-40 bg-red-100 border font-bold text-lg">
+                <button className="w-40 bg-slate-100 border font-bold text-lg text-slate-800 rounded hover:bg-slate-400">
                   Vote
                 </button>
               </div>
