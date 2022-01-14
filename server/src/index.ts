@@ -14,7 +14,6 @@ async function startApolloServer() {
     schema,
     context: createContext,
     plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
-    introspection: true,
   });
 
   await server.start();
