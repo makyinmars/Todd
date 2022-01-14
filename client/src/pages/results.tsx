@@ -23,6 +23,10 @@ export async function getServerSideProps() {
       query Votes {
         votes {
           ideaId
+          idea {
+            title
+            imageUrl
+          }
         }
       }
     `,
