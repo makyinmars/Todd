@@ -1,6 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import { gql, useQuery } from "@apollo/client";
+import Image from "next/image";
 
 import Spinner from "./spinner";
 import VoteIdeaForm from "./voteIdeaForm";
@@ -44,27 +45,30 @@ const Idea = () => {
       <Head>
         <title>Todd Chavez{`'`}s Crazy Ideas</title>
       </Head>
-
       {data && (
-        <div className="m-2 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
+        <div className="m-2 grid grid-cols-1 gap-6 my-4 sm:w-2/3 md:w-2/3 sm:mx-auto">
           {data.ideas.map((idea, index) => (
             <ul
               key={index}
-              className="grid grid-columns-1 rounded bg-slate-700 h-full"
+              className="grid grid-columns-1 lg:flex rounded border-4 border-slate-500 shadow-lg hover:shadow-slate-200 border-double bg-slate-700 h-full w-full"
             >
-              <li className="pt-2 text-xl font-bold text-center">
-                {idea.title}
-              </li>
-
-              <li className="flex justify-center">
-                <img
-                  className="h-48 py-2 w-80"
+              <li className="flex justify-center m-2 h-auto">
+                <Image
+                  className="rounded"
                   src={idea.imageUrl}
                   alt={idea.title}
+                  width={400}
+                  height={350}
                 />
               </li>
-              <li className="p-2">{idea.content}</li>
-              <VoteIdeaForm id={idea.id} />
+
+              <div className="flex flex-col justify-center items-center gap-3 m-2 w-full">
+                <li className="pt-2 text-xl font-bold text-center self-center">
+                  {idea.title}
+                </li>
+                <li className="w-4/5">{idea.content}</li>
+                <VoteIdeaForm id={idea.id} />
+              </div>
             </ul>
           ))}
         </div>
