@@ -1,6 +1,6 @@
 import { mutationField, nonNull, nullable } from "nexus";
-import { CreateIdeaInput, VoteIdeaWhereUniqueInput } from "../inputs";
-import { Idea, Vote } from "../models";
+import { VoteIdeaWhereUniqueInput } from "../inputs";
+import { Vote } from "../models";
 
 export const voteIdea = mutationField("voteIdea", {
   type: nullable(Vote),

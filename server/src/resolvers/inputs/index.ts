@@ -21,11 +21,11 @@ export const VoteIdeaWhereUniqueInput = inputObjectType({
   },
 });
 
-export const CreateIdeaInput = inputObjectType({
-  name: "CreateIdeaInput",
-  definition(t) {
-    t.nonNull.string("title");
-    t.nonNull.string("content");
-    t.nonNull.string("imageUrl");
-  },
-});
+// export const CreateIdeaInput = inputObjectType({
+//   name: "CreateIdeaInput",
+//   definition(t) {
+//     t.nonNull.string("title");
+//     t.nonNull.string("content");
+//     t.nonNull.string("imageUrl");
+//   },
+// });
