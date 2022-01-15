@@ -16,16 +16,17 @@ export const voteIdea = mutationField("voteIdea", {
   },
 });
 
-export const createIdea = mutationField("createIdea", {
-  type: nullable(Idea),
-  args: {
-    input: nonNull(CreateIdeaInput),
-  },
-  resolve: async (_root, args, ctx) => {
-    return ctx.prisma.idea.create({
-      data: {
-        ...args.input,
-      },
-    });
-  },
-});
+// Uncomment if i need to add new ideas
+// export const createIdea = mutationField("createIdea", {
+//   type: nullable(Idea),
+//   args: {
+//     input: nonNull(CreateIdeaInput),
+//   },
+//   resolve: async (_root, args, ctx) => {
+//     return ctx.prisma.idea.create({
+//       data: {
+//         ...args.input,
+//       },
+//     });
+//   },
+// });

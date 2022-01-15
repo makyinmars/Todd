@@ -25,9 +25,18 @@ const Layout = ({ children }: LayoutProps) => {
       </header>
       <main>{children}</main>
       <footer className="flex justify-evenly w-full py-2 font-bold text-xl">
-        <Link href="/results">Results</Link>
-        <p>Source Code</p>
-        <p>Github</p>
+        <Link href="/results">
+          <a className="hover:text-slate-400">Results</a>
+        </Link>
+        <a
+          className="hover:text-slate-400"
+          href="https://github.com/makyfj/Todd"
+        >
+          Source Code
+        </a>
+        <a className="hover:text-slate-400" href="https://github.com/makyfj">
+          <p>Github</p>
+        </a>
       </footer>
     </div>
   );

@@ -14,11 +14,6 @@ declare global {
 }
 
 export interface NexusGenInputs {
-  CreateIdeaInput: { // input type
-    content: string; // String!
-    imageUrl: string; // String!
-    title: string; // String!
-  }
   IdeaWhereUniqueInput: { // input type
     id: string; // ID!
   }
@@ -75,7 +70,6 @@ export interface NexusGenFieldTypes {
     votes: NexusGenRootTypes['Vote'][]; // [Vote!]!
   }
   Mutation: { // field return type
-    createIdea: NexusGenRootTypes['Idea'] | null; // Idea
     voteIdea: NexusGenRootTypes['Vote'] | null; // Vote
   }
   Query: { // field return type
@@ -100,7 +94,6 @@ export interface NexusGenFieldTypeNames {
     votes: 'Vote'
   }
   Mutation: { // field return type name
-    createIdea: 'Idea'
     voteIdea: 'Vote'
   }
   Query: { // field return type name
@@ -118,9 +111,6 @@ export interface NexusGenFieldTypeNames {
 
 export interface NexusGenArgTypes {
   Mutation: {
-    createIdea: { // args
-      input: NexusGenInputs['CreateIdeaInput']; // CreateIdeaInput!
-    }
     voteIdea: { // args
       where: NexusGenInputs['VoteIdeaWhereUniqueInput']; // VoteIdeaWhereUniqueInput!
     }
