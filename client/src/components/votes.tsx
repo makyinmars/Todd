@@ -51,15 +51,15 @@ const Votes = () => {
           data.votes.map((vote, index) => (
             <ul
               key={index}
-              className="bg-slate-600 flex w-full my-2 justify-between items-center p-2 rounded border-4 border-double border-slate-500 shadow-md hover:shadow-slate-200"
+              className="bg-slate-600 flex w-full my-2 justify-between items-center p-2 rounded border-4 border-double border-slate-500"
             >
               <li>
                 <Image
                   src={vote.idea.imageUrl}
                   alt={vote.idea.title}
-                  width={200}
+                  width={180}
                   height={150}
-                  className=""
+                  layout="fixed"
                 />
               </li>
               <li className="font-bold text-lg text-center">
