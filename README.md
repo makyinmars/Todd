@@ -5,7 +5,7 @@ and I'd love to see what is Todd best idea based on votes.
 
 ## Technology:
 
-[T3 Stack]("https://www.github.com/t3-oss/create-t3-app")
+[T3 Stack](https://www.github.com/t3-oss/create-t3-app)
 
 ## UX - Initial Draft
 
