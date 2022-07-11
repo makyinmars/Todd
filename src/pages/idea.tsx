@@ -25,11 +25,10 @@ const Idea = () => {
 
   return (
     <div>
-      <h1 className="text-center text-slate-200 my-2">IDEA</h1>
       <div className="max-w-md mx-auto">
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="grid grid-cols-1 bg-slate-300 p-4 rounded gap-2"
+          className="grid grid-cols-1 gap-2 p-4 rounded bg-slate-300"
         >
           <label htmlFor="title">Title</label>
           <input
@@ -61,7 +60,7 @@ const Idea = () => {
             className="rounded bg-slate-100"
           />
           <div className="flex justify-center">
-            <button className="p-2 bg-slate-600 rounded text-slate-100">
+            <button className="p-2 rounded bg-slate-600 text-slate-100">
               Submit
             </button>
           </div>

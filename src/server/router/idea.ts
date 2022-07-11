@@ -30,6 +30,21 @@ export const ideaRouter = createRouter()
       }
     },
   })
+  .query("getIdeasByVotes", {
+    async resolve() {
+      // Get ideas sorted by votes
+      const ideas = await prisma.idea.findMany({
+        select: defaultIdeaSelect,
+        orderBy: {
+          votes: "desc",
+        },
+      });
+
+      if (ideas) {
+        return ideas;
+      }
+    },
+  })
   .mutation("createIdea", {
     input: z.object({
       title: z.string(),
@@ -46,21 +61,24 @@ export const ideaRouter = createRouter()
       return idea;
     },
   })
-  .mutation("addVote", {
+  .mutation("updateVote", {
     input: z.object({
       id: z.string(),
-      votes: z.number(),
     }),
     async resolve({ input }) {
-      const ideaUpdated = await prisma.idea.update({
-        where: {
-          id: input.id,
-        },
-        data: {
-          votes: input.votes,
-        },
+      const idea = await prisma.idea.findFirstOrThrow({
+        where: { id: input.id },
       });
 
-      return ideaUpdated;
+      if (idea) {
+        const updatedIdea = await prisma.idea.update({
+          where: { id: input.id },
+          data: {
+            votes: idea.votes + 1,
+          },
+        });
+
+        return updatedIdea;
+      }
     },
   });

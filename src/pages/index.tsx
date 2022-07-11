@@ -1,26 +1,32 @@
-import { useEffect } from "react";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 import { trpc } from "@/utils/trpc";
 
 const Home = () => {
-  const utils = trpc.useContext();
-
+  const router = useRouter();
   const ideas = trpc.useQuery(["idea.getIdeas"]);
+  const ideasByVotes = trpc.useQuery(["idea.getIdeasByVotes"]);
+
+  const increaseVote = trpc.useMutation(["idea.updateVote"], {
+    onSuccess: () => {
+      ideasByVotes.refetch();
+    },
+  });
 
   const { data, isSuccess, isLoading } = ideas;
 
-  useEffect(() => {
-    utils.refetchQueries(["idea.getIdeas"]);
-  }, [utils]);
+  const onClick = async (id: string) => {
+    try {
+      const data = await increaseVote.mutateAsync({ id });
+      if (data) {
+        router.push("/results");
+      }
+    } catch {}
+  };
 
   return (
     <div className="my-2">
-      <h1 className="my-2 text-xl font-bold text-center text-slate-300">
-        Todd Chavez{"`"}s Crazy Ideas
-      </h1>
-
-      {/* Create a rounded loader using tailwindcss */}
       {isLoading && (
         <div className="flex items-center justify-center my-4">
           <div className="w-20 h-20 border-t-4 border-b-4 rounded-full border-slate-300 animate-spin"></div>
@@ -28,9 +34,12 @@ const Home = () => {
       )}
 
       {isSuccess && (
-        <div className="grid grid-cols-1 gap-4 mx-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 mx-4 my-4">
           {data.map((idea, i) => (
-            <div key={i} className="max-w-sm p-2 mx-auto rounded bg-slate-300">
+            <div
+              key={i}
+              className="grid max-w-xl grid-cols-1 p-2 mx-auto rounded md:grid-cols-2 md:max-w-5xl bg-slate-300"
+            >
               <Image
                 src={idea.imageUrl}
                 alt={idea.title}
@@ -38,12 +47,21 @@ const Home = () => {
                 height={300}
                 className="rounded"
               />
-              <h2 className="text-lg font-bold text-center">{idea.title}</h2>
-              <p className="text-center">{idea.content}</p>
-              <div className="flex justify-center mt-2">
-                <button className="w-32 p-2 rounded bg-slate-800 text-slate-300">
-                  Vote
-                </button>
+              <div className="place-self-center">
+                <h2 className="text-lg font-bold text-center md:mb-4 md:text-2xl">
+                  {idea.title}
+                </h2>
+                <p className="mx-4 text-center md:mb-4 md:text-lg">
+                  {idea.content}
+                </p>
+                <div className="flex justify-center mt-2 md:mt-4 md:text-lg">
+                  <button
+                    className="w-32 p-2 rounded bg-slate-800 text-slate-300"
+                    onClick={() => onClick(idea.id)}
+                  >
+                    Vote
+                  </button>
+                </div>
               </div>
             </div>
           ))}
