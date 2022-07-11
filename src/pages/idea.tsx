@@ -25,7 +25,7 @@ const Idea = () => {
 
   return (
     <div>
-      <h1 className="text-center">IDEA</h1>
+      <h1 className="text-center text-slate-200 my-2">IDEA</h1>
       <div className="max-w-md mx-auto">
         <form
           onSubmit={handleSubmit(onSubmit)}
