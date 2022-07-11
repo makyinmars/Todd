@@ -12,15 +12,16 @@ interface IdeaInput {
 const Idea = () => {
   const { register, handleSubmit } = useForm<IdeaInput>();
 
-  const createIdea = trpc.useMutation("idea.createIdea");
+  // const createIdea = trpc.useMutation("idea.createIdea");
 
   const onSubmit: SubmitHandler<IdeaInput> = async (data) => {
-    try {
-      const idea = await createIdea.mutateAsync(data);
-      if (idea) {
-        console.log(idea);
-      }
-    } catch {}
+    console.log(data);
+    // try {
+    //   const idea = await createIdea.mutateAsync(data);
+    //   if (idea) {
+    //     console.log(idea);
+    //   }
+    // } catch {}
   };
 
   return (

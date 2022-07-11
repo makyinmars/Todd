@@ -45,22 +45,22 @@ export const ideaRouter = createRouter()
       }
     },
   })
-  .mutation("createIdea", {
-    input: z.object({
-      title: z.string(),
-      content: z.string(),
-      imageUrl: z.string(),
-      votes: z.number(),
-    }),
-    async resolve({ input }) {
-      const idea = await prisma.idea.create({
-        data: input,
-        select: defaultIdeaSelect,
-      });
+  // .mutation("createIdea", {
+  //   input: z.object({
+  //     title: z.string(),
+  //     content: z.string(),
+  //     imageUrl: z.string(),
+  //     votes: z.number(),
+  //   }),
+  //   async resolve({ input }) {
+  //     const idea = await prisma.idea.create({
+  //       data: input,
+  //       select: defaultIdeaSelect,
+  //     });
 
-      return idea;
-    },
-  })
+  //     return idea;
+  //   },
+  // })
   .mutation("updateVote", {
     input: z.object({
       id: z.string(),
