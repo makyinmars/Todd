@@ -33,7 +33,7 @@ const Home = () => {
         </div>
       )}
 
-      {isSuccess && (
+      {isSuccess && data && (
         <div className="grid grid-cols-1 gap-4 mx-4 my-4">
           {data.map((idea, i) => (
             <div
