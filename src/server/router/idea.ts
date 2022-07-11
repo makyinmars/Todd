@@ -2,7 +2,7 @@ import { createRouter } from "./context";
 import { z } from "zod";
 import { Prisma } from "@prisma/client";
 import { prisma } from "@/server/db/client";
-import { TRPCError } from "@trpc/server/dist/declarations/src";
+import { TRPCError } from "@trpc/server";
 
 const defaultIdeaSelect = Prisma.validator<Prisma.IdeaSelect>()({
   id: true,
