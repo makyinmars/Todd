@@ -2,6 +2,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 
 import { trpc } from "@/utils/trpc";
+import Meta from "@/components/meta";
 
 const Home = () => {
   const router = useRouter();
@@ -26,48 +27,58 @@ const Home = () => {
   };
 
   return (
-    <div className="my-2">
-      {isLoading && (
-        <div className="flex items-center justify-center my-4">
-          <div className="w-20 h-20 border-t-4 border-b-4 rounded-full border-slate-300 animate-spin"></div>
-        </div>
-      )}
+    <>
+      <Meta
+        title="Todd Chavez's Crazy Ideas"
+        description="
+   Todd Chavez and his wacky ideas are one of the show's biggest sources of comic relief. 
+   From the ridiculous cube-shaped marbles to the hugely successful Cabracadabra, Todd's 
+   imagination knew no limits. Vote for your favorite idea and see how it turns out!
+    "
+      />
+      <div className="my-2">
+        {isLoading && (
+          <div className="flex items-center justify-center my-4">
+            <div className="w-20 h-20 border-t-4 border-b-4 rounded-full border-slate-300 animate-spin"></div>
+          </div>
+        )}
 
-      {isSuccess && data && (
-        <div className="grid grid-cols-1 gap-4 mx-4 my-4">
-          {data.map((idea, i) => (
-            <div
-              key={i}
-              className="grid max-w-xl grid-cols-1 p-2 mx-auto rounded md:grid-cols-2 md:max-w-5xl bg-slate-300"
-            >
-              <Image
-                src={idea.imageUrl}
-                alt={idea.title}
-                width={400}
-                height={300}
-                className="rounded"
-              />
-              <div className="place-self-center">
-                <h2 className="text-lg font-bold text-center md:mb-4 md:text-2xl">
-                  {idea.title}
-                </h2>
-                <p className="mx-4 text-center md:mb-4 md:text-lg">
-                  {idea.content}
-                </p>
-                <div className="flex justify-center mt-2 md:mt-4 md:text-lg">
-                  <button
-                    className="w-32 p-2 rounded bg-slate-800 text-slate-300"
-                    onClick={() => onClick(idea.id)}
-                  >
-                    Vote
-                  </button>
+        {isSuccess && data && (
+          <div className="grid grid-cols-1 gap-4 mx-4 my-4">
+            {data.map((idea, i) => (
+              <div
+                key={i}
+                className="grid max-w-xl grid-cols-1 p-2 mx-auto rounded md:grid-cols-2 md:max-w-5xl bg-slate-300"
+              >
+                <Image
+                  src={idea.imageUrl}
+                  alt={idea.title}
+                  width={400}
+                  height={300}
+                  className="rounded"
+                />
+                <div className="place-self-center">
+                  <h2 className="text-lg font-bold text-center md:mb-4 md:text-2xl">
+                    {idea.title}
+                  </h2>
+                  <p className="mx-4 text-center md:mb-4 md:text-lg">
+                    {idea.content}
+                  </p>
+                  <div className="flex justify-center mt-2 md:mt-4 md:text-lg">
+                    <button
+                      className="w-32 p-2 rounded bg-slate-800 text-slate-300"
+                      onClick={() => onClick(idea.id)}
+                    >
+                      Vote
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </>
   );
 };
 
