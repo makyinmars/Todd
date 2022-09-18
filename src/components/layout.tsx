@@ -11,7 +11,7 @@ const Layout = ({ children }: LayoutProps) => {
       <header className="flex items-center my-2 justify-evenly">
         <Link href="/">
           <a>
-            <FcHome className="w-10 h-10" />
+            <FcHome className="w-10 h-10 animate-bouce" />
           </a>
         </Link>
         <h1 className="text-3xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-slate-500 to-slate-100">

@@ -48,7 +48,7 @@ const Home = () => {
             {data.map((idea, i) => (
               <div
                 key={i}
-                className="grid max-w-xl grid-cols-1 p-2 mx-auto rounded md:grid-cols-2 md:max-w-5xl bg-slate-300"
+                className="grid max-w-xl grid-cols-1 p-2 mx-auto rounded md:grid-cols-2 md:max-w-5xl bg-slate-200 hover:bg-slate-300"
               >
                 <Image
                   src={idea.imageUrl}
@@ -66,7 +66,7 @@ const Home = () => {
                   </p>
                   <div className="flex justify-center mt-2 md:mt-4 md:text-lg">
                     <button
-                      className="w-32 p-2 rounded bg-slate-800 text-slate-300"
+                      className="w-32 p-2 rounded bg-slate-700 text-slate-300 hover:bg-slate-900"
                       onClick={() => onClick(idea.id)}
                     >
                       Vote
